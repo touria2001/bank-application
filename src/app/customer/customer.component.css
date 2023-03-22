@@ -1,0 +1,7 @@
+@media (max-width: 400px) {
+    .total {
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }   
+}

@@ -1,0 +1,107 @@
+<div class="grid md:grid-cols-2 gap-4 mb-4">
+  <div
+    class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
+  >
+    <div class="text-2xl text-gray-400 dark:text-gray-500">
+      <span
+        class="mb-2 text-sm lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >number of customers
+        <div class="text-center">{{ numberCustomers }}</div>
+      </span>
+    </div>
+  </div>
+  <div
+    class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
+  >
+    <span
+      class="mb-2 text-sm lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >total amount ($)
+      <div class="text-center">{{ totalAmount }} 
+        </div>
+    </span>
+  </div>
+</div>
+<div class="flex flex-col">
+  <div class="w-full flex flex-col sm:flex-row">
+    <input
+      type="search"
+      placeholder="search"
+      name="search"
+      id="search"
+      class="w-full m-2 border rounded-md"
+      (input)="onQuery($event)"
+    />
+    
+    <button
+      type="button"
+     routerLink="/add"
+      class="md:w-40 self-end focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Add Customer
+    </button>
+  </div>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead
+        class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">First name</th>
+          <th scope="col" class="px-6 py-3">Last name</th>
+          <th scope="col" class="hidden xl:table-cell px-6 py-3">Email</th>
+          <th scope="col" class="hidden md:table-cell px-6 py-3">Gender</th>
+          <th scope="col" class="hidden xl:table-cell px-6 py-3">address</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 cursor-pointer"
+          *ngFor="let customer of customers"
+        >
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {{ customer.firstName }}
+          </th>
+          <td class="px-6 py-4">
+            {{ customer.lastName }}
+          </td>
+          <td class="hidden xl:table-cell px-6 py-4">
+            {{ customer.email }}
+          </td>
+          <td class="hidden md:table-cell px-6 py-4">
+            {{ customer.gender }}
+          </td>
+          <td class="hidden xl:table-cell px-6 py-4">
+            {{ customer.address }}
+          </td>
+          <td class="px-6 py-4">
+         
+            <a
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            
+            (click)="editCustomer(customer)"
+            >Edit</a
+          >
+            <a
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-green-500"
+              (click)="details(customer)"
+            >
+              details</a
+            >
+            <a
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-red-500"
+              (click)="delete(customer)"
+            >
+              {{ getIsDeleteLoading(customer) ? "Loading..." : "Delete" }}</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
